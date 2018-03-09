@@ -57,18 +57,18 @@ public class March8ScreenSaver {
 
     //Initializes the letters
     static {
-        //int startAdj = 80;
-        int startAdj = 60;
-        //int letterBorderSize = 14;
+        int startAdj = 80;
+        //int startAdj = 60;
         int letterBorderSize = 14;
-        //int letterWidth = 153;
-        int letterWidth = 114;
-        //int letterSpacing = letterWidth / 2;
-        int letterSpacing = letterWidth / 3;
-        //int letterHeight = 203;
-        int letterHeight = 164;
-        //int heightLevelFirst = 585;
-        int heightLevelFirst = 450;
+        //int letterBorderSize = 14;
+        int letterWidth = 153;
+        //int letterWidth = 114;
+        int letterSpacing = letterWidth / 2;
+        //int letterSpacing = letterWidth / 3;
+        int letterHeight = 203;
+        //int letterHeight = 164;
+        int heightLevelFirst = 585;
+        //int heightLevelFirst = 450;
         int heightLevelSecond = heightLevelFirst - letterBorderSize;
         int heightLevelThird = heightLevelFirst - letterHeight / 2 + letterBorderSize / 2;
         int heightLevelForth = heightLevelFirst - letterHeight / 2 - letterBorderSize / 2;
@@ -570,8 +570,10 @@ public class March8ScreenSaver {
         jFrame.setJMenuBar(menu);
         jFrame.getContentPane().add(BorderLayout.CENTER, myDrawingPanel);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        int width = 1366;
-        int height = 768;
+        //int width = 1366;
+        int width = 1920;
+        //int height = 768;
+        int height = 1080;
         jFrame.setSize(width, height);
         jFrame.setVisible(true);
     }
@@ -762,14 +764,14 @@ public class March8ScreenSaver {
      */
     class MyDrawingPanel extends JPanel implements ControllerEventListener {
         private boolean eventTestMart;
-        //private int xMaxRandomPosition = 1885;
-        private int xMaxRandomPosition = 1321;
-        //private int yMaxRandomPosition = 1010;
-        private int yMaxRandomPosition = 698;
-        //private int minRectangleSize = 16;
+        private int xMaxRandomPosition = 1885;
+        //private int xMaxRandomPosition = 1321;
+        private int yMaxRandomPosition = 1010;
+        //private int yMaxRandomPosition = 698;
         private int minRectangleSize = 16;
-        //private int adjMaxRectangleSize = 53;
-        private int adjMaxRectangleSize = 89;
+        //private int minRectangleSize = 16;
+        private int adjMaxRectangleSize = 53;
+        //private int adjMaxRectangleSize = 89;
 
         @Override
         public void paint(Graphics g) {
