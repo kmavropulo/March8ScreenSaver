@@ -20,9 +20,13 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -533,12 +537,17 @@ public class March8ScreenSaver {
         JMenuItem stop = new JMenuItem("Pause");
         JMenuItem soundOn = new JMenuItem("Enable sound");
         JMenuItem soundOff = new JMenuItem("Mute sound");
+        JMenuItem author = new JMenuItem("Author");
 
         restart.addActionListener(restartPlaying);
         play.addActionListener(continuePlaying);
         stop.addActionListener(stopPlaying);
         soundOn.addActionListener(enableSound);
         soundOff.addActionListener(muteSound);
+        author.addActionListener(
+                (e -> navigatePage(
+                        "https://upsa.epam.com/workload/employeeView" +
+                                ".do?employeeId=4060741400321290312")));
 
         screenSaverMenu.add(restart);
         screenSaverMenu.add(play);
@@ -546,6 +555,7 @@ public class March8ScreenSaver {
         screenSaverMenu.add(soundOn);
         screenSaverMenu.add(soundOff);
         mp3MenuBar.add(screenSaverMenu);
+        screenSaverMenu.add(author);
 
         jFrame.setJMenuBar(mp3MenuBar);
         jFrame.getContentPane().add(BorderLayout.CENTER, myDrawingPanel);
@@ -716,6 +726,17 @@ public class March8ScreenSaver {
             if (currentVolume == 64) {
                 currentVolume = 0;
                 sequencer.stop();
+            }
+        }
+    }
+
+    private void navigatePage(String URI) {
+        if (Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)
+                && (Desktop.getDesktop() != null)) {
+            try {
+                Desktop.getDesktop().browse(new URI(URI));
+            } catch (URISyntaxException | IOException ex) {
+                ex.printStackTrace();
             }
         }
     }
