@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 import java.awt.BorderLayout;
@@ -46,6 +47,9 @@ public class March8ScreenSaver {
     private static List<Line> lettersContours;
     private static String authorUri = "https://upsa.epam.com/workload/employeeView" +
             ".do?employeeId=4060741400321290312";
+    private static String aboutMsg = "This java swing screen saver mini app " +
+            "congratulates women from all the Universe with the Woman's day, especially EPAM " +
+            "Systems employees ones.";
     private static List<List<Object>> rectanglesParameters = new ArrayList<>();
     private static int currentVolume = 64;
     private static boolean isPaused;
@@ -532,7 +536,7 @@ public class March8ScreenSaver {
         MuteSound muteSound = new MuteSound();
         JFrame jFrame = new JFrame("March8ScreenSaver by kmavropulo");
 
-        JMenuBar mp3MenuBar = new JMenuBar();
+        JMenuBar menu = new JMenuBar();
         JMenu screenSaverMenu = new JMenu("Menu");
         JMenuItem restart = new JMenuItem("Restart");
         JMenuItem play = new JMenuItem("Play");
@@ -540,24 +544,30 @@ public class March8ScreenSaver {
         JMenuItem soundOn = new JMenuItem("Enable sound");
         JMenuItem soundOff = new JMenuItem("Mute sound");
         JMenuItem author = new JMenuItem("Author");
+        JMenuItem about = new JMenuItem("About");
 
         restart.addActionListener(restartPlaying);
         play.addActionListener(continuePlaying);
         stop.addActionListener(stopPlaying);
         soundOn.addActionListener(enableSound);
         soundOff.addActionListener(muteSound);
-        author.addActionListener(
-                (e -> navigatePage(authorUri)));
+        author.addActionListener(e -> navigatePage(authorUri));
+        about.addActionListener(e -> JOptionPane.showMessageDialog(
+                null,
+                aboutMsg,
+                "About",
+                JOptionPane.INFORMATION_MESSAGE));
 
         screenSaverMenu.add(restart);
         screenSaverMenu.add(play);
         screenSaverMenu.add(stop);
         screenSaverMenu.add(soundOn);
         screenSaverMenu.add(soundOff);
-        mp3MenuBar.add(screenSaverMenu);
         screenSaverMenu.add(author);
+        screenSaverMenu.add(about);
+        menu.add(screenSaverMenu);
 
-        jFrame.setJMenuBar(mp3MenuBar);
+        jFrame.setJMenuBar(menu);
         jFrame.getContentPane().add(BorderLayout.CENTER, myDrawingPanel);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         int width = 1366;
