@@ -44,8 +44,12 @@ public class March8ScreenSaver {
     private static MyDrawingPanel myDrawingPanel;
     private static Sequencer sequencer;
     private static List<Line> lettersContours;
-    private int currentVolume = 64;
-    private List<List<Object>> rectanglesParameters = new ArrayList<>();
+    private static String authorUri = "https://upsa.epam.com/workload/employeeView" +
+            ".do?employeeId=4060741400321290312";
+    private static List<List<Object>> rectanglesParameters = new ArrayList<>();
+    private static int currentVolume = 64;
+    private static boolean isPaused;
+
 
     //Initializes the letters
     static {
@@ -512,8 +516,6 @@ public class March8ScreenSaver {
         );
     }
 
-    private boolean isPaused;
-
     public static void main(String[] args) throws Exception {
         new March8ScreenSaver().start();
     }
@@ -545,9 +547,7 @@ public class March8ScreenSaver {
         soundOn.addActionListener(enableSound);
         soundOff.addActionListener(muteSound);
         author.addActionListener(
-                (e -> navigatePage(
-                        "https://upsa.epam.com/workload/employeeView" +
-                                ".do?employeeId=4060741400321290312")));
+                (e -> navigatePage(authorUri)));
 
         screenSaverMenu.add(restart);
         screenSaverMenu.add(play);
@@ -666,6 +666,22 @@ public class March8ScreenSaver {
     }
 
     /**
+     * Navigates to the page by given @code{URI}.
+     *
+     * @param URI given @code{URI}.
+     */
+    private void navigatePage(String URI) {
+        if (Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)
+                && (Desktop.getDesktop() != null)) {
+            try {
+                Desktop.getDesktop().browse(new URI(URI));
+            } catch (URISyntaxException | IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    /**
      * This @code{ContinuePlaying} class declares the @code{ActionListener} implementation.
      */
     public class RestartPlaying implements ActionListener {
@@ -726,17 +742,6 @@ public class March8ScreenSaver {
             if (currentVolume == 64) {
                 currentVolume = 0;
                 sequencer.stop();
-            }
-        }
-    }
-
-    private void navigatePage(String URI) {
-        if (Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)
-                && (Desktop.getDesktop() != null)) {
-            try {
-                Desktop.getDesktop().browse(new URI(URI));
-            } catch (URISyntaxException | IOException ex) {
-                ex.printStackTrace();
             }
         }
     }
